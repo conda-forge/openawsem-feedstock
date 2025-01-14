@@ -10,7 +10,7 @@ source:
   sha256: d43deb8a6704642ee36cc52e943a4529fd9c675d7944981a658a8ce9749bfcff
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
   - awsem_create = openawsem.scripts.mm_create_project:main
@@ -19,10 +19,10 @@ build:
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
-  build:
-    - python >=3.8
+  host:
+    - python {{ python_min }}
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - biopython
     - matplotlib-base
     - numpy
@@ -32,6 +32,8 @@ requirements:
     - mdtraj
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - openawsem
   commands:
